@@ -10,5 +10,11 @@ export class AdBooksService {
   getBooks(motClef) {
     return this.http.get(this.URL + '?q=' + motClef);
   }
+  getBooksByCategory(motClef , category) {
+    return this.http.get(this.URL + '?q=' + motClef + '+subject:' + category);
+  }
+  getBooksByAuthor(motClef , author) {
+    return this.http.get(this.URL + '?q=' + motClef + '+inauthor:' + author);
+  }
 
 }

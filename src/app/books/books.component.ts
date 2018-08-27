@@ -28,4 +28,29 @@ export class BooksComponent implements OnInit {
       console.log(this.books);
     });
   }
+  getBooksByCategory(category) {
+    this.booksService.getBooksByCategory(this.motClef , category).subscribe(res => {
+      this.books = JSON.parse(JSON.stringify(res)).items ;
+      console.log(category);
+    });
+  }
+  getBooksByAuthors(author) {
+    this.booksService.getBooksByAuthor(this.motClef , author).subscribe(res => {
+      this.books = JSON.parse(JSON.stringify(res)).items ;
+    });
+  }
+  search(searchEvent) {
+    let term = searchEvent.target.value
+    // We will only perform the search if we have 3 or more characters
+    if (term.trim() === '' || term.trim().length < 1) {
+      // Load cached users
+      this.filtredBooks = this.books;
+    } else {
+      // Get the searched users from github
+     this.getBooksByCategory(term);
+     console.log(this.books);
+
+    }
+  }
+
 }
