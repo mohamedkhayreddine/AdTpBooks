@@ -11,9 +11,10 @@ export class SearchPipe implements PipeTransform {
       return value;
     } else {
       return value.filter(item => {
-        console.log(args)
-        console.log(item.volumeInfo.authors);
-        return item.volumeInfo.authors[0].toLowerCase().includes(args.toLowerCase());
+        if (!item.volumeInfo.authors) {
+          return value;
+        }
+        return item.volumeInfo.authors[0].toLowerCase().includes(args.toLowerCase()) | item.volumeInfo.title.toLowerCase().includes(args.toLowerCase());
       });
     }
 
